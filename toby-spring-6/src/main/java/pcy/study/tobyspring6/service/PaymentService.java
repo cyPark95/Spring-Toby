@@ -10,13 +10,16 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 public class PaymentService {
 
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {
-        // 환율 가져오기
+        BigDecimal exchangeRate = getExchangeRate(currency);
+        return new Payment(orderId, currency, foreignCurrencyAmount, exchangeRate);
+    }
+
+    private BigDecimal getExchangeRate(String currency) throws IOException {
         URL url = new URL("https://open.er-api.com/v6/latest/" + currency);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -25,15 +28,7 @@ public class PaymentService {
 
         ObjectMapper mapper = new ObjectMapper();
         ExchangeRateData data = mapper.readValue(response, ExchangeRateData.class);
-        BigDecimal exchangeRate = data.rates().get("KRW");
-
-        // 금액 계산
-        BigDecimal convertedAmount = foreignCurrencyAmount.multiply(exchangeRate);
-
-        // 유효 시간 계산
-        LocalDateTime validUntil = LocalDateTime.now().plusMinutes(30);
-
-        return new Payment(orderId, currency, foreignCurrencyAmount, exchangeRate, convertedAmount, validUntil);
+        return data.rates().get("KRW");
     }
 
     public static void main(String[] args) throws Exception {

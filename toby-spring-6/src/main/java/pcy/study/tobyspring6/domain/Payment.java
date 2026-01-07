@@ -17,12 +17,12 @@ public class Payment {
     private final BigDecimal convertedAmount;
     private final LocalDateTime validUntil;
 
-    public Payment(Long orderId, String currency, BigDecimal foreignCurrencyAmount, BigDecimal exchangeRate, BigDecimal convertedAmount, LocalDateTime validUntil) {
+    public Payment(Long orderId, String currency, BigDecimal foreignCurrencyAmount, BigDecimal exchangeRate) {
         this.orderId = orderId;
         this.currency = currency;
         this.foreignCurrencyAmount = foreignCurrencyAmount;
         this.exchangeRate = exchangeRate;
-        this.convertedAmount = convertedAmount;
-        this.validUntil = validUntil;
+        this.convertedAmount = foreignCurrencyAmount.multiply(exchangeRate);
+        this.validUntil = LocalDateTime.now().plusMinutes(30);
     }
 }
