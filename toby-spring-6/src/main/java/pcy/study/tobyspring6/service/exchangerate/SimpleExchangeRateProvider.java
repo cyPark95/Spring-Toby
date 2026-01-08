@@ -1,12 +1,11 @@
-package pcy.study.tobyspring6.service;
+package pcy.study.tobyspring6.service.exchangerate;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
-public class SimpleExchangeRatePaymentService extends AbstractPaymentService {
+public class SimpleExchangeRateProvider {
 
-    @Override
-    BigDecimal getExchangeRate(String currency) throws IOException {
+    public BigDecimal getExchangeRate(String currency) throws IOException {
         if(currency.equals("USD")) {
             return BigDecimal.valueOf(1000);
         }
