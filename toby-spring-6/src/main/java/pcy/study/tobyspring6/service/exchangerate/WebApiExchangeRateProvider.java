@@ -11,8 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class WebApiExchangeRateProvider {
+public class WebApiExchangeRateProvider implements ExchangeRateProvider {
 
+    @Override
     public BigDecimal getExchangeRate(String currency) throws IOException {
         URL url = new URL("https://open.er-api.com/v6/latest/" + currency);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
