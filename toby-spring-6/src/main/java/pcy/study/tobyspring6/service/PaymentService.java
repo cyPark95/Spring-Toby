@@ -1,17 +1,17 @@
 package pcy.study.tobyspring6.service;
 
 import pcy.study.tobyspring6.domain.Payment;
-import pcy.study.tobyspring6.service.exchangerate.WebApiExchangeRateProvider;
+import pcy.study.tobyspring6.service.exchangerate.ExchangeRateProvider;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 public class PaymentService {
 
-    private final WebApiExchangeRateProvider exchangeRateProvider;
+    private final ExchangeRateProvider exchangeRateProvider;
 
-    public PaymentService() {
-        this.exchangeRateProvider = new WebApiExchangeRateProvider();
+    public PaymentService(ExchangeRateProvider exchangeRateProvider) {
+        this.exchangeRateProvider = exchangeRateProvider;
     }
 
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {

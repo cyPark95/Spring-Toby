@@ -3,8 +3,9 @@ package pcy.study.tobyspring6.service.exchangerate;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-public class SimpleExchangeRateProvider {
+public class SimpleExchangeRateProvider implements ExchangeRateProvider {
 
+    @Override
     public BigDecimal getExchangeRate(String currency) throws IOException {
         if(currency.equals("USD")) {
             return BigDecimal.valueOf(1000);
