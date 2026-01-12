@@ -17,7 +17,6 @@ public class PaymentService {
 
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {
         BigDecimal exchangeRate = exchangeRateProvider.getExchangeRate(currency);
-        LocalDateTime validUntil = LocalDateTime.now(clock).plusMinutes(30);
-        return new Payment(orderId, currency, foreignCurrencyAmount, exchangeRate, validUntil);
+        return Payment.createPrepared(orderId, currency, foreignCurrencyAmount, exchangeRate, LocalDateTime.now(clock));
     }
 }
