@@ -1,4 +1,4 @@
-package pcy.study.tobyspring6.service.exchangerate;
+package pcy.study.tobyspring6.payment;
 
 import java.io.IOException;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package pcy.study.tobyspring6.domain;
+package pcy.study.tobyspring6.exchangerate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

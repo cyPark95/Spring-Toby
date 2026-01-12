@@ -1,4 +1,6 @@
-package pcy.study.tobyspring6.service.exchangerate;
+package pcy.study.tobyspring6.exchangerate;
+
+import pcy.study.tobyspring6.payment.ExchangeRateProvider;
 
 import java.io.IOException;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package pcy.study.tobyspring6.domain;
+package pcy.study.tobyspring6.payment;
 
 import lombok.Getter;
 import lombok.ToString;

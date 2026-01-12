@@ -2,10 +2,10 @@ package pcy.study.tobyspring6;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pcy.study.tobyspring6.service.PaymentService;
-import pcy.study.tobyspring6.service.exchangerate.CachedExchangeRateProvider;
-import pcy.study.tobyspring6.service.exchangerate.ExchangeRateProvider;
-import pcy.study.tobyspring6.service.exchangerate.WebApiExchangeRateProvider;
+import pcy.study.tobyspring6.payment.PaymentService;
+import pcy.study.tobyspring6.exchangerate.CachedExchangeRateProvider;
+import pcy.study.tobyspring6.payment.ExchangeRateProvider;
+import pcy.study.tobyspring6.exchangerate.WebApiExchangeRateProvider;
 
 @Configuration
 public class ObjectFactory {

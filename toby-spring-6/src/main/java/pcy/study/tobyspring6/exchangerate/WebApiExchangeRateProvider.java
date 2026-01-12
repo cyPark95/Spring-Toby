@@ -1,7 +1,7 @@
-package pcy.study.tobyspring6.service.exchangerate;
+package pcy.study.tobyspring6.exchangerate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import pcy.study.tobyspring6.domain.ExchangeRateData;
+import pcy.study.tobyspring6.payment.ExchangeRateProvider;
 
 import java.io.BufferedReader;
 import java.io.IOException;

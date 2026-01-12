@@ -2,8 +2,8 @@ package pcy.study.tobyspring6;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pcy.study.tobyspring6.domain.Payment;
-import pcy.study.tobyspring6.service.PaymentService;
+import pcy.study.tobyspring6.payment.Payment;
+import pcy.study.tobyspring6.payment.PaymentService;
 
 import java.math.BigDecimal;
 
