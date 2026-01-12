@@ -9,16 +9,20 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestObjectFactory.class)
+@ContextConfiguration(classes = TestPaymentConfig.class)
 class PaymentServiceSpringTest {
 
     @Autowired
     private PaymentService paymentService;
+
+    @Autowired
+    private Clock clock;
 
     @Test
     @DisplayName("prepare 메서드의 3가지 요구사항 충족 여부 검증")
@@ -34,8 +38,8 @@ class PaymentServiceSpringTest {
         assertThat(payment.getConvertedAmount()).isEqualByComparingTo(BigDecimal.valueOf(10_000));
 
         // 원화 환상 금액의 유효 시간 계산
-        assertThat(payment.getValidUntil()).isAfter(LocalDateTime.now());
-        assertThat(payment.getValidUntil()).isBefore(LocalDateTime.now().plusMinutes(30));
+        LocalDateTime expectedValidUntil = LocalDateTime.now(clock).plusMinutes(30);
+        assertThat(payment.getValidUntil()).isEqualTo(expectedValidUntil);
     }
 
 }
