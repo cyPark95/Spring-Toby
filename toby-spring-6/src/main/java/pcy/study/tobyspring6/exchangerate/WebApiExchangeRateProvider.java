@@ -18,7 +18,10 @@ public class WebApiExchangeRateProvider implements ExchangeRateProvider {
     @Override
     public BigDecimal getExchangeRate(String currency) {
         String url = "https://open.er-api.com/v6/latest/" + currency;
+        return runApiForExchangeRate(url);
+    }
 
+    private BigDecimal runApiForExchangeRate(String url) {
         URI uri;
         try {
             uri = new URI(url);
@@ -28,20 +31,28 @@ public class WebApiExchangeRateProvider implements ExchangeRateProvider {
 
         String response;
         try {
-            HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                response = bufferedReader.lines().collect(Collectors.joining());
-            }
+            response = executeApi(uri);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            ExchangeRateData data = mapper.readValue(response, ExchangeRateData.class);
-            return data.rates().get("KRW");
+            return extractExchangeRate(response);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String executeApi(URI uri) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            return bufferedReader.lines().collect(Collectors.joining());
+        }
+    }
+
+    private BigDecimal extractExchangeRate(String response) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ExchangeRateData data = mapper.readValue(response, ExchangeRateData.class);
+        return data.rates().get("KRW");
     }
 }
