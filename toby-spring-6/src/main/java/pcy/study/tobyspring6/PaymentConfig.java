@@ -2,9 +2,9 @@ package pcy.study.tobyspring6;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pcy.study.tobyspring6.api.ApiTemplate;
+import org.springframework.web.client.RestTemplate;
 import pcy.study.tobyspring6.exchangerate.CachedExchangeRateProvider;
-import pcy.study.tobyspring6.exchangerate.WebApiExchangeRateProvider;
+import pcy.study.tobyspring6.exchangerate.RestTemplateExchangeProvider;
 import pcy.study.tobyspring6.payment.ExchangeRateProvider;
 import pcy.study.tobyspring6.payment.PaymentService;
 
@@ -25,7 +25,7 @@ public class PaymentConfig {
 
     @Bean
     public ExchangeRateProvider exchangeRateProvider() {
-        return new WebApiExchangeRateProvider(apiTemplate());
+        return new RestTemplateExchangeProvider(restTemplate());
     }
 
     @Bean
@@ -34,7 +34,7 @@ public class PaymentConfig {
     }
 
     @Bean
-    public ApiTemplate apiTemplate() {
-        return new ApiTemplate();
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
