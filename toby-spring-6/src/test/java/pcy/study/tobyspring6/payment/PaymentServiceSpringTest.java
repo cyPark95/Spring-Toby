@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -26,7 +25,7 @@ class PaymentServiceSpringTest {
 
     @Test
     @DisplayName("prepare 메서드의 3가지 요구사항 충족 여부 검증")
-    void prepare() throws IOException {
+    void prepare() {
         // when
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 

@@ -1,6 +1,5 @@
 package pcy.study.tobyspring6.payment;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 public class ExchangeProviderStub implements ExchangeRateProvider {
@@ -12,7 +11,7 @@ public class ExchangeProviderStub implements ExchangeRateProvider {
     }
 
     @Override
-    public BigDecimal getExchangeRate(String currency) throws IOException {
+    public BigDecimal getExchangeRate(String currency) {
         return exchangeRate;
     }
 }

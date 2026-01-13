@@ -1,5 +1,6 @@
 package pcy.study.tobyspring6.exchangerate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pcy.study.tobyspring6.payment.ExchangeRateProvider;
 
@@ -8,21 +9,39 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.stream.Collectors;
 
 public class WebApiExchangeRateProvider implements ExchangeRateProvider {
 
     @Override
-    public BigDecimal getExchangeRate(String currency) throws IOException {
-        URL url = new URL("https://open.er-api.com/v6/latest/" + currency);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String response = bufferedReader.lines().collect(Collectors.joining());
-        bufferedReader.close();
+    public BigDecimal getExchangeRate(String currency) {
+        String url = "https://open.er-api.com/v6/latest/" + currency;
 
-        ObjectMapper mapper = new ObjectMapper();
-        ExchangeRateData data = mapper.readValue(response, ExchangeRateData.class);
-        return data.rates().get("KRW");
+        URI uri;
+        try {
+            uri = new URI(url);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+
+        String response;
+        try {
+            HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                response = bufferedReader.lines().collect(Collectors.joining());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            ExchangeRateData data = mapper.readValue(response, ExchangeRateData.class);
+            return data.rates().get("KRW");
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

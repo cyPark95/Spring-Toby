@@ -3,7 +3,6 @@ package pcy.study.tobyspring6.exchangerate;
 
 import pcy.study.tobyspring6.payment.ExchangeRateProvider;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -21,7 +20,7 @@ public class CachedExchangeRateProvider implements ExchangeRateProvider {
     }
 
     @Override
-    public BigDecimal getExchangeRate(String currency) throws IOException {
+    public BigDecimal getExchangeRate(String currency) {
         if(isValidCache(currency)) {
             return cachedExchangeRates.get(currency);
         }

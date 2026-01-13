@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public class Client {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         BeanFactory factory = new AnnotationConfigApplicationContext(PaymentConfig.class);
         PaymentService paymentService = factory.getBean(PaymentService.class);
         Payment payment = paymentService.prepare(100L, "USD", BigDecimal.valueOf(50.7));

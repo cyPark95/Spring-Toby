@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.Instant;
@@ -24,14 +23,14 @@ class PaymentServiceTest {
 
     @Test
     @DisplayName("prepare 메서드의 3가지 요구사항 충족 여부 검증")
-    void convertedAmount() throws IOException {
+    void convertedAmount() {
         testAmount(BigDecimal.valueOf(500), BigDecimal.valueOf(5_000));
         testAmount(BigDecimal.valueOf(1_000), BigDecimal.valueOf(10_000));
         testAmount(BigDecimal.valueOf(3_000), BigDecimal.valueOf(30_000));
     }
 
     @Test
-    void validUntil() throws IOException {
+    void validUntil() {
         // given
         PaymentService paymentService = new PaymentService(new ExchangeProviderStub(BigDecimal.valueOf(1_000)), clock);
 
@@ -43,7 +42,7 @@ class PaymentServiceTest {
         assertThat(payment.getValidUntil()).isEqualTo(expectedValidUntil);
     }
 
-    private void testAmount(BigDecimal exchangeRate, BigDecimal convertedAmount) throws IOException {
+    private void testAmount(BigDecimal exchangeRate, BigDecimal convertedAmount) {
         // given
         PaymentService paymentService = new PaymentService(new ExchangeProviderStub(exchangeRate), clock);
 
