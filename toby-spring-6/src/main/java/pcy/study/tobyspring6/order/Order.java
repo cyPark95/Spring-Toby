@@ -1,9 +1,6 @@
 package pcy.study.tobyspring6.order;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -12,6 +9,7 @@ import java.math.BigDecimal;
 @ToString
 public class Order {
 
+    @Setter
     private Long id;
 
     private String no;
