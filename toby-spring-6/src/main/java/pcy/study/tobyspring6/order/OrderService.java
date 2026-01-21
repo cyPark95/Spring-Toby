@@ -1,24 +1,11 @@
 package pcy.study.tobyspring6.order;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.support.TransactionTemplate;
-
 import java.math.BigDecimal;
+import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class OrderService {
+public interface OrderService {
 
-    private final OrderRepository orderRepository;
-    private final PlatformTransactionManager transactionManager;
+    Order createOrder(String no, BigDecimal total);
 
-    public Order createOrder(String no, BigDecimal total) {
-        Order order = new Order(no, total);
-        return new TransactionTemplate(transactionManager).execute(status -> {
-            orderRepository.save(order);
-            return order;
-        });
-    }
+    List<Order> createOrders(List<OrderRequest> orderRequests);
 }
