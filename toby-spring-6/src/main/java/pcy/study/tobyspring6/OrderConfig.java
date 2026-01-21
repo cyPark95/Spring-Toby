@@ -4,7 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import pcy.study.tobyspring6.data.OrderRepository;
+import pcy.study.tobyspring6.data.JpaOrderRepository;
+import pcy.study.tobyspring6.order.OrderRepository;
 import pcy.study.tobyspring6.order.OrderService;
 
 @Configuration
@@ -18,6 +19,6 @@ public class OrderConfig {
 
     @Bean
     public OrderRepository orderRepository() {
-        return new OrderRepository();
+        return new JpaOrderRepository();
     }
 }

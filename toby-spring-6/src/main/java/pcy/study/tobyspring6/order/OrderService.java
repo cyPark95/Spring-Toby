@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
-import pcy.study.tobyspring6.data.OrderRepository;
 
 import java.math.BigDecimal;
 
