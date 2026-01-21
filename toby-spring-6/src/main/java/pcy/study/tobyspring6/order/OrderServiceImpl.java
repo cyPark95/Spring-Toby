@@ -2,6 +2,7 @@ package pcy.study.tobyspring6.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,6 +21,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public List<Order> createOrders(List<OrderRequest> orderRequests) {
         return orderRequests.stream()
                 .map(request -> createOrder(request.no(), request.total()))
