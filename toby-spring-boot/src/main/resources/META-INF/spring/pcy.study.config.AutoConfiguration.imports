@@ -1,2 +1,3 @@
 pcy.study.config.autoconfigure.DispatcherServletConfiguration
 pcy.study.config.autoconfigure.TomcatWebServerConfigration
+pcy.study.config.autoconfigure.JettyWebServerConfigration
