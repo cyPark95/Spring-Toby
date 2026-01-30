@@ -20,7 +20,7 @@ public class HelloApiTest {
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
                         .host("localhost")
-                        .port(8080)
+                        .port(9090)
                         .path("/hello")
                         .queryParam("name", "Spring")
                         .build())
@@ -43,7 +43,7 @@ public class HelloApiTest {
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
                         .host("localhost")
-                        .port(8080)
+                        .port(9090)
                         .path("/hello")
                         .queryParam("name", (String) null)
                         .build())
