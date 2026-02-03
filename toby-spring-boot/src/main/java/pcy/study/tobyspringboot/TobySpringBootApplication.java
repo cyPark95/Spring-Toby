@@ -1,6 +1,7 @@
 package pcy.study.tobyspringboot;
 
-import pcy.study.config.SpringBootApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class TobySpringBootApplication {
