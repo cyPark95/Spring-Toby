@@ -2,13 +2,13 @@ package pcy.study.tobyspringboot.hello.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import pcy.study.tobyspringboot.HelloBootTest;
 import pcy.study.tobyspringboot.hello.repository.HelloRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@HelloBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Transactional
 public class HelloServiceCountTest {
 
