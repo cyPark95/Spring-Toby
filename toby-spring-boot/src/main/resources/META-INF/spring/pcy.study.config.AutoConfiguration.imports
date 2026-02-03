@@ -3,3 +3,4 @@ pcy.study.config.autoconfigure.TomcatWebServerConfigration
 pcy.study.config.autoconfigure.JettyWebServerConfigration
 pcy.study.config.autoconfigure.PropertyPlaceholderConfiguration
 pcy.study.config.autoconfigure.PropertyPostProcessorConfiguration
+pcy.study.config.autoconfigure.DataSourceConfiguration
