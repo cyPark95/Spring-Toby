@@ -21,7 +21,7 @@ public class HelloApiTest {
                         .scheme("http")
                         .host("localhost")
                         .port(9090)
-                        .path("/hello")
+                        .path("/app/hello")
                         .queryParam("name", "Spring")
                         .build())
                 .retrieve()
@@ -44,7 +44,7 @@ public class HelloApiTest {
                         .scheme("http")
                         .host("localhost")
                         .port(9090)
-                        .path("/hello")
+                        .path("/app/hello")
                         .queryParam("name", (String) null)
                         .build())
                 .exchange((req, res) ->
