@@ -2,7 +2,7 @@ package pcy.study.tobycleanspinrgpart1.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pcy.study.tobycleanspinrgpart1.domain.request.MemberCreateRequest;
+import pcy.study.tobycleanspinrgpart1.domain.request.MemberRegisterRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -27,12 +27,12 @@ class MemberTest {
             }
         };
 
-        MemberCreateRequest createRequest = new MemberCreateRequest("toby@splean.app", "Toby", "secret");
-        member = Member.create(createRequest, passwordEncoder);
+        MemberRegisterRequest registerRequest = new MemberRegisterRequest("toby@splean.app", "Toby", "secret");
+        member = Member.register(registerRequest, passwordEncoder);
     }
 
     @Test
-    void createMember() {
+    void registerMember() {
         // then
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
@@ -129,11 +129,11 @@ class MemberTest {
     @Test
     void invalidEmail() {
         // given
-        MemberCreateRequest createRequest = new MemberCreateRequest("invalid email", "Toby", "secret");
+        MemberRegisterRequest createRequest = new MemberRegisterRequest("invalid email", "Toby", "secret");
 
         // when
         // then
-        assertThatThrownBy(() -> Member.create(createRequest, passwordEncoder))
+        assertThatThrownBy(() -> Member.register(createRequest, passwordEncoder))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
