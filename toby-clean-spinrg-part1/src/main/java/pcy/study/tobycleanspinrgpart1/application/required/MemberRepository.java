@@ -1,7 +1,10 @@
 package pcy.study.tobycleanspinrgpart1.application.required;
 
 import org.springframework.data.repository.Repository;
+import pcy.study.tobycleanspinrgpart1.domain.Email;
 import pcy.study.tobycleanspinrgpart1.domain.Member;
+
+import java.util.Optional;
 
 /**
  * 회원 정보를 저장하거나 조회한다.
@@ -9,4 +12,6 @@ import pcy.study.tobycleanspinrgpart1.domain.Member;
 public interface MemberRepository extends Repository<Member, Long> {
 
     Member save(Member member);
+
+    Optional<Member> findByEmail(Email email);
 }
