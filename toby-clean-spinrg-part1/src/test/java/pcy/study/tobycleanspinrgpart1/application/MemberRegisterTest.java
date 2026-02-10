@@ -1,5 +1,6 @@
 package pcy.study.tobycleanspinrgpart1.application;
 
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
@@ -45,5 +46,19 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
         // then
         assertThatThrownBy(() -> memberRegister.register(registerRequest))
                 .isInstanceOf(DuplicateEmailException.class);
+    }
+
+    @Test
+    void memberRegisterRequestFail() {
+        // when
+        // then
+        checkValidation(new MemberRegisterRequest("toby@splearn.app", "Toby", "longsecret"));
+        checkValidation(new MemberRegisterRequest("toby@splearn.app", "Charlie______________", "longsecret"));
+        checkValidation(new MemberRegisterRequest("tobysplearn.app", "Charlie", "longsecret"));
+    }
+
+    private void checkValidation(MemberRegisterRequest invalid) {
+        assertThatThrownBy(() -> memberRegister.register(invalid))
+                .isInstanceOf(ConstraintViolationException.class);
     }
 }

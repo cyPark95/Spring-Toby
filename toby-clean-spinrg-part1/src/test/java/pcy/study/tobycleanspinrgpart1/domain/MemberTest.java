@@ -77,7 +77,7 @@ class MemberTest {
     void verifyPassword() {
         // when
         // then
-        assertThat(member.verifyPassword("secret", passwordEncoder)).isTrue();
+        assertThat(member.verifyPassword("verysecret", passwordEncoder)).isTrue();
 
         // when
         // then

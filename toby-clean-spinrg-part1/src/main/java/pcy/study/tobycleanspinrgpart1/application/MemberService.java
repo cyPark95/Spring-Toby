@@ -3,6 +3,7 @@ package pcy.study.tobycleanspinrgpart1.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import pcy.study.tobycleanspinrgpart1.application.provided.MemberRegister;
 import pcy.study.tobycleanspinrgpart1.application.required.EmailSender;
 import pcy.study.tobycleanspinrgpart1.application.required.MemberRepository;
@@ -13,6 +14,7 @@ import pcy.study.tobycleanspinrgpart1.domain.PasswordEncoder;
 import pcy.study.tobycleanspinrgpart1.domain.request.MemberRegisterRequest;
 
 @Service
+@Validated
 @Transactional
 @RequiredArgsConstructor
 public class MemberService implements MemberRegister {

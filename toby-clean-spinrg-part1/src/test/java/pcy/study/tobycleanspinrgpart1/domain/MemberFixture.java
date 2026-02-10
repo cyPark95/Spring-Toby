@@ -12,7 +12,7 @@ public class MemberFixture {
 
     @NonNull
     public static MemberRegisterRequest createMemberRegisterRequest(String email) {
-        return new MemberRegisterRequest(email, "Toby", "secret");
+        return new MemberRegisterRequest(email, "Charlie", "verysecret");
     }
 
     @NonNull

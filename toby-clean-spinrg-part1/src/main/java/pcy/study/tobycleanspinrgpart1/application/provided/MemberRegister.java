@@ -1,5 +1,6 @@
 package pcy.study.tobycleanspinrgpart1.application.provided;
 
+import jakarta.validation.Valid;
 import pcy.study.tobycleanspinrgpart1.domain.Member;
 import pcy.study.tobycleanspinrgpart1.domain.request.MemberRegisterRequest;
 
@@ -8,5 +9,5 @@ import pcy.study.tobycleanspinrgpart1.domain.request.MemberRegisterRequest;
  */
 public interface MemberRegister {
 
-    Member register(MemberRegisterRequest registerRequest);
+    Member register(@Valid MemberRegisterRequest registerRequest);
 }
