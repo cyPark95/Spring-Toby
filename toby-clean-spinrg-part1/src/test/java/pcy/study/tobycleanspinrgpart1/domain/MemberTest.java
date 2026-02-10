@@ -2,6 +2,7 @@ package pcy.study.tobycleanspinrgpart1.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pcy.study.tobycleanspinrgpart1.domain.request.MemberCreateRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,7 +27,8 @@ class MemberTest {
             }
         };
 
-        member = Member.create("toby@splean.app", "Toby", "secret", passwordEncoder);
+        MemberCreateRequest createRequest = new MemberCreateRequest("toby@splean.app", "Toby", "secret");
+        member = Member.create(createRequest, passwordEncoder);
     }
 
     @Test
@@ -122,5 +124,16 @@ class MemberTest {
         // when
         // then
         assertThat(member.isActive()).isTrue();
+    }
+
+    @Test
+    void invalidEmail() {
+        // given
+        MemberCreateRequest createRequest = new MemberCreateRequest("invalid email", "Toby", "secret");
+
+        // when
+        // then
+        assertThatThrownBy(() -> Member.create(createRequest, passwordEncoder))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
