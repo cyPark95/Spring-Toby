@@ -6,6 +6,8 @@ import pcy.study.tobycleanspinrgpart1.domain.request.MemberRegisterRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static pcy.study.tobycleanspinrgpart1.domain.MemberFixture.createMemberRegisterRequest;
+import static pcy.study.tobycleanspinrgpart1.domain.MemberFixture.createPasswordEncoder;
 
 class MemberTest {
 
@@ -15,20 +17,8 @@ class MemberTest {
 
     @BeforeEach
     void setUp() {
-        passwordEncoder = new PasswordEncoder() {
-            @Override
-            public String encode(String password) {
-                return password.toUpperCase();
-            }
-
-            @Override
-            public boolean matched(String password, String passwordHash) {
-                return encode(password).equals(passwordHash);
-            }
-        };
-
-        MemberRegisterRequest registerRequest = new MemberRegisterRequest("toby@splean.app", "Toby", "secret");
-        member = Member.register(registerRequest, passwordEncoder);
+        passwordEncoder = createPasswordEncoder();
+        member = Member.register(createMemberRegisterRequest(), passwordEncoder);
     }
 
     @Test
@@ -129,7 +119,7 @@ class MemberTest {
     @Test
     void invalidEmail() {
         // given
-        MemberRegisterRequest createRequest = new MemberRegisterRequest("invalid email", "Toby", "secret");
+        MemberRegisterRequest createRequest = createMemberRegisterRequest("invalid email");
 
         // when
         // then
