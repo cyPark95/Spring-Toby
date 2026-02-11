@@ -1,13 +1,12 @@
-package pcy.study.tobycleanspinrgpart1.application;
+package pcy.study.tobycleanspinrgpart1.application.provided;
 
+import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.TestConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import pcy.study.tobycleanspinrgpart1.SplearnTestConfiguration;
-import pcy.study.tobycleanspinrgpart1.application.provided.MemberRegister;
 import pcy.study.tobycleanspinrgpart1.domain.DuplicateEmailException;
 import pcy.study.tobycleanspinrgpart1.domain.Member;
 import pcy.study.tobycleanspinrgpart1.domain.MemberFixture;
@@ -20,8 +19,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest
 @Transactional
 @Import(SplearnTestConfiguration.class)
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-public record MemberRegisterTest(MemberRegister memberRegister) {
+public record MemberRegisterTest(
+        MemberRegister memberRegister,
+        EntityManager entityManager
+) {
 
     @Test
     void register() {
@@ -46,6 +47,22 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
         // then
         assertThatThrownBy(() -> memberRegister.register(registerRequest))
                 .isInstanceOf(DuplicateEmailException.class);
+    }
+
+    @Test
+    void activate() {
+        // given
+        MemberRegisterRequest registerRequest = MemberFixture.createMemberRegisterRequest();
+        Member member = memberRegister.register(registerRequest);
+        entityManager.flush();
+        entityManager.clear();
+
+        // when
+        Member activeMember = memberRegister.activate(member.getId());
+        entityManager.flush();
+
+        // then
+        assertThat(activeMember.getStatus()).isEqualTo(MemberStatus.ACTIVE);
     }
 
     @Test

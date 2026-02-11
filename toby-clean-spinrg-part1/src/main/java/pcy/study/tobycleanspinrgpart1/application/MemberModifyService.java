@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import pcy.study.tobycleanspinrgpart1.application.provided.MemberFinder;
 import pcy.study.tobycleanspinrgpart1.application.provided.MemberRegister;
 import pcy.study.tobycleanspinrgpart1.application.required.EmailSender;
 import pcy.study.tobycleanspinrgpart1.application.required.MemberRepository;
@@ -17,8 +18,9 @@ import pcy.study.tobycleanspinrgpart1.domain.request.MemberRegisterRequest;
 @Validated
 @Transactional
 @RequiredArgsConstructor
-public class MemberService implements MemberRegister {
+public class MemberModifyService implements MemberRegister {
 
+    private final MemberFinder memberFinder;
     private final MemberRepository memberRepository;
     private final EmailSender emailSender;
     private final PasswordEncoder passwordEncoder;
@@ -29,6 +31,14 @@ public class MemberService implements MemberRegister {
         Member member = Member.register(registerRequest, passwordEncoder);
         memberRepository.save(member);
         sendWelcomeEmail(member);
+        return member;
+    }
+
+    @Override
+    public Member activate(Long memberId) {
+        Member member = memberFinder.find(memberId);
+        member.activate();
+        memberRepository.save(member);
         return member;
     }
 
