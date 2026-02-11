@@ -1,0 +1,22 @@
+package pcy.study.tobycleanspinrgpart1;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+import org.springframework.boot.SpringApplication;
+
+class SplearnApplicationTest {
+
+    @Test
+    void run() {
+        // given
+        try(MockedStatic<SpringApplication> mocked = Mockito.mockStatic(SpringApplication.class)) {
+
+            // when
+            TobyCleanSpinrgPart1Application.main(new String[0]);
+
+            // then
+            mocked.verify(() -> SpringApplication.run(TobyCleanSpinrgPart1Application.class, new String[0]));
+        }
+    }
+}
