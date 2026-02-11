@@ -5,37 +5,24 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
 import pcy.study.tobycleanspinrg.domain.request.MemberRegisterRequest;
 
 import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(name = "UK_MEMBER_EMAIL_ADDRESS", columnNames = "email_addree"))
-@NaturalIdCache
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Member extends AbstractEntity {
 
     @Embedded
-    @NaturalId
     private Email email;
 
-    @Column(length = 100, nullable = false)
     private String nickname;
 
-    @Column(length = 200, nullable = false)
     private String passwordHash;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 50, nullable = false)
     private MemberStatus status;
 
     public static Member register(MemberRegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
