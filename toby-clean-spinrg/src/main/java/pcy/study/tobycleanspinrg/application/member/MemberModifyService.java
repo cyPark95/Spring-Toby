@@ -8,11 +8,10 @@ import pcy.study.tobycleanspinrg.application.member.provided.MemberFinder;
 import pcy.study.tobycleanspinrg.application.member.provided.MemberRegister;
 import pcy.study.tobycleanspinrg.application.member.required.EmailSender;
 import pcy.study.tobycleanspinrg.application.member.required.MemberRepository;
-import pcy.study.tobycleanspinrg.domain.member.DuplicateEmailException;
-import pcy.study.tobycleanspinrg.domain.shared.Email;
-import pcy.study.tobycleanspinrg.domain.member.Member;
-import pcy.study.tobycleanspinrg.domain.member.PasswordEncoder;
+import pcy.study.tobycleanspinrg.domain.member.*;
+import pcy.study.tobycleanspinrg.domain.member.request.MemberInfoUpdateRequest;
 import pcy.study.tobycleanspinrg.domain.member.request.MemberRegisterRequest;
+import pcy.study.tobycleanspinrg.domain.shared.Email;
 
 @Service
 @Validated
@@ -42,9 +41,42 @@ public class MemberModifyService implements MemberRegister {
         return member;
     }
 
+    @Override
+    public Member deactivate(Long memberId) {
+        Member member = memberFinder.find(memberId);
+        member.deactivate();
+        memberRepository.save(member);
+        return member;
+    }
+
+    @Override
+    public Member updateInfo(Long memberId, MemberInfoUpdateRequest updateRequest) {
+        Member member = memberFinder.find(memberId);
+        checkDuplicateProfile(member, updateRequest.profileAddress());
+
+        member.updateInfo(updateRequest);
+        memberRepository.save(member);
+        return member;
+    }
+
+    private void checkDuplicateProfile(Member member, String profileAddress) {
+        if (profileAddress.isEmpty()) {
+            return;
+        }
+
+        Profile currentProfile = member.getDetail().getProfile();
+        if (currentProfile != null && currentProfile.address().equals(profileAddress)) {
+            return;
+        }
+
+        if (memberRepository.findByProfile(new Profile(profileAddress)).isPresent()) {
+            throw new DuplicateProfileException("이미 존재하는 프로필 주소입니다: " + profileAddress);
+        }
+    }
+
     private void checkDuplicateEmail(MemberRegisterRequest registerRequest) {
         Email email = new Email(registerRequest.email());
-        if(memberRepository.findByEmail(email).isPresent()) {
+        if (memberRepository.findByEmail(email).isPresent()) {
             throw new DuplicateEmailException("이미 사용 중인 이메일입니다: " + registerRequest.email());
         }
     }

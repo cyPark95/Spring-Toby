@@ -2,6 +2,7 @@ package pcy.study.tobycleanspinrg.application.member.provided;
 
 import jakarta.validation.Valid;
 import pcy.study.tobycleanspinrg.domain.member.Member;
+import pcy.study.tobycleanspinrg.domain.member.request.MemberInfoUpdateRequest;
 import pcy.study.tobycleanspinrg.domain.member.request.MemberRegisterRequest;
 
 /**
@@ -12,4 +13,8 @@ public interface MemberRegister {
     Member register(@Valid MemberRegisterRequest registerRequest);
 
     Member activate(Long memberId);
+
+    Member deactivate(Long memberId);
+
+    Member updateInfo(Long memberId, @Valid MemberInfoUpdateRequest updateRequest);
 }

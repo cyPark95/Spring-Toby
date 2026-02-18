@@ -1,6 +1,5 @@
 package pcy.study.tobycleanspinrg.domain.member;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,7 +18,6 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberDetail extends AbstractEntity {
 
-    @Embedded
     private Profile profile;
 
     private String introduction;
