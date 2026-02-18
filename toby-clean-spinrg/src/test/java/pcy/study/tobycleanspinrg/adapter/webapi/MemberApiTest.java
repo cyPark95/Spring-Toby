@@ -59,4 +59,23 @@ public class MemberApiTest {
         assertThat(member.getNickname()).isEqualTo(request.nickname());
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
+
+    @Test
+    void duplicateEmail() throws Exception {
+        // given
+        memberRegister.register(createMemberRegisterRequest());
+
+        MemberRegisterRequest request = createMemberRegisterRequest();
+        String requestJson = objectMapper.writeValueAsString(request);
+
+        // when
+        MvcTestResult result = mvcTester.post().uri("/api/members")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestJson).exchange();
+
+        // then
+        assertThat(result)
+                .apply(print())
+                .hasStatus(HttpStatus.CONFLICT);
+    }
 }
