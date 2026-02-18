@@ -9,11 +9,8 @@ import pcy.study.tobycleanspinrg.domain.member.Member;
 import pcy.study.tobycleanspinrg.domain.member.MemberFixture;
 import pcy.study.tobycleanspinrg.domain.member.MemberStatus;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static pcy.study.tobycleanspinrg.domain.member.MemberFixture.createPasswordEncoder;
 
 @DataJpaTest
 class MemberRepositoryTest {
@@ -27,7 +24,7 @@ class MemberRepositoryTest {
     @Test
     void createMember() {
         // given
-        Member member = Member.register(MemberFixture.createMemberRegisterRequest(), createPasswordEncoder());
+        Member member = MemberFixture.createMember();
 
         // when
         memberRepository.save(member);
@@ -46,10 +43,10 @@ class MemberRepositoryTest {
     @Test
     void duplicateEmailFail() {
         // given
-        Member member = Member.register(MemberFixture.createMemberRegisterRequest(), createPasswordEncoder());
+        Member member = MemberFixture.createMember();
         memberRepository.save(member);
 
-        Member newMember = Member.register(MemberFixture.createMemberRegisterRequest(), createPasswordEncoder());
+        Member newMember = MemberFixture.createMember();
 
         // when
         // then

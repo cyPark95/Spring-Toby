@@ -1,6 +1,7 @@
 package pcy.study.tobycleanspinrg.domain.member;
 
 import org.springframework.lang.NonNull;
+import org.springframework.test.util.ReflectionTestUtils;
 import pcy.study.tobycleanspinrg.domain.member.request.MemberRegisterRequest;
 
 public class MemberFixture {
@@ -28,5 +29,19 @@ public class MemberFixture {
                 return encode(password).equals(passwordHash);
             }
         };
+    }
+
+    public static Member createMember() {
+        return Member.register(createMemberRegisterRequest(), createPasswordEncoder());
+    }
+
+    public static Member createMember(Long id) {
+        Member member = Member.register(createMemberRegisterRequest(), createPasswordEncoder());
+        ReflectionTestUtils.setField(member, "id", id);
+        return member;
+    }
+
+    public static Member createMember(String email) {
+        return Member.register(createMemberRegisterRequest(email), createPasswordEncoder());
     }
 }
