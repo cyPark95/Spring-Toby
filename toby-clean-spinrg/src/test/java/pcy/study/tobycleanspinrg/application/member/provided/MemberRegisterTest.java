@@ -1,4 +1,4 @@
-package pcy.study.tobycleanspinrg.application.provided;
+package pcy.study.tobycleanspinrg.application.member.provided;
 
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
@@ -7,11 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 import pcy.study.tobycleanspinrg.SplearnTestConfiguration;
-import pcy.study.tobycleanspinrg.domain.DuplicateEmailException;
-import pcy.study.tobycleanspinrg.domain.Member;
-import pcy.study.tobycleanspinrg.domain.MemberFixture;
-import pcy.study.tobycleanspinrg.domain.MemberStatus;
-import pcy.study.tobycleanspinrg.domain.request.MemberRegisterRequest;
+import pcy.study.tobycleanspinrg.domain.member.DuplicateEmailException;
+import pcy.study.tobycleanspinrg.domain.member.Member;
+import pcy.study.tobycleanspinrg.domain.member.MemberFixture;
+import pcy.study.tobycleanspinrg.domain.member.MemberStatus;
+import pcy.study.tobycleanspinrg.domain.member.request.MemberRegisterRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

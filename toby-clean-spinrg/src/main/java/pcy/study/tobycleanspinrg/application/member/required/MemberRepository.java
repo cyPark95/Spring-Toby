@@ -1,8 +1,8 @@
-package pcy.study.tobycleanspinrg.application.required;
+package pcy.study.tobycleanspinrg.application.member.required;
 
 import org.springframework.data.repository.Repository;
-import pcy.study.tobycleanspinrg.domain.Email;
-import pcy.study.tobycleanspinrg.domain.Member;
+import pcy.study.tobycleanspinrg.domain.shared.Email;
+import pcy.study.tobycleanspinrg.domain.member.Member;
 
 import java.util.Optional;
 

@@ -2,10 +2,10 @@ package pcy.study.tobycleanspinrg;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import pcy.study.tobycleanspinrg.application.required.EmailSender;
-import pcy.study.tobycleanspinrg.domain.PasswordEncoder;
+import pcy.study.tobycleanspinrg.application.member.required.EmailSender;
+import pcy.study.tobycleanspinrg.domain.member.PasswordEncoder;
 
-import static pcy.study.tobycleanspinrg.domain.MemberFixture.createPasswordEncoder;
+import static pcy.study.tobycleanspinrg.domain.member.MemberFixture.createPasswordEncoder;
 
 @TestConfiguration
 public class SplearnTestConfiguration {

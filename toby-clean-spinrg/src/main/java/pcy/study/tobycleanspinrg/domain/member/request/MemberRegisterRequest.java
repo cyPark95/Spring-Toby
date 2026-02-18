@@ -1,4 +1,4 @@
-package pcy.study.tobycleanspinrg.domain.request;
+package pcy.study.tobycleanspinrg.domain.member.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;

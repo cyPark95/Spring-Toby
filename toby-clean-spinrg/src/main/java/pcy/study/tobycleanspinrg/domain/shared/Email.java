@@ -1,4 +1,4 @@
-package pcy.study.tobycleanspinrg.domain;
+package pcy.study.tobycleanspinrg.domain.shared;
 
 import java.util.regex.Pattern;
 

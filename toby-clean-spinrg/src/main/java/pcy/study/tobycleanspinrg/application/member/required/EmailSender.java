@@ -1,6 +1,6 @@
-package pcy.study.tobycleanspinrg.application.required;
+package pcy.study.tobycleanspinrg.application.member.required;
 
-import pcy.study.tobycleanspinrg.domain.Email;
+import pcy.study.tobycleanspinrg.domain.shared.Email;
 
 /**
  * 이메일을 발송한다.

@@ -1,4 +1,4 @@
-package pcy.study.tobycleanspinrg.domain;
+package pcy.study.tobycleanspinrg.domain.shared;
 
 import org.junit.jupiter.api.Test;
 

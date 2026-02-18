@@ -2,7 +2,7 @@ package pcy.study.tobycleanspinrg.adapter.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import pcy.study.tobycleanspinrg.domain.PasswordEncoder;
+import pcy.study.tobycleanspinrg.domain.member.PasswordEncoder;
 
 @Component
 public class SecurePasswordEncoder implements PasswordEncoder {

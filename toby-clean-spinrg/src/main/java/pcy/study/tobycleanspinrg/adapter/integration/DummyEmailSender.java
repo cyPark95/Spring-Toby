@@ -2,8 +2,8 @@ package pcy.study.tobycleanspinrg.adapter.integration;
 
 import org.springframework.context.annotation.Fallback;
 import org.springframework.stereotype.Component;
-import pcy.study.tobycleanspinrg.application.required.EmailSender;
-import pcy.study.tobycleanspinrg.domain.Email;
+import pcy.study.tobycleanspinrg.application.member.required.EmailSender;
+import pcy.study.tobycleanspinrg.domain.shared.Email;
 
 @Component
 @Fallback

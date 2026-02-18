@@ -1,12 +1,12 @@
-package pcy.study.tobycleanspinrg.application;
+package pcy.study.tobycleanspinrg.application.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import pcy.study.tobycleanspinrg.application.provided.MemberFinder;
-import pcy.study.tobycleanspinrg.application.required.MemberRepository;
-import pcy.study.tobycleanspinrg.domain.Member;
+import pcy.study.tobycleanspinrg.application.member.provided.MemberFinder;
+import pcy.study.tobycleanspinrg.application.member.required.MemberRepository;
+import pcy.study.tobycleanspinrg.domain.member.Member;
 
 @Service
 @Validated

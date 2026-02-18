@@ -1,13 +1,14 @@
-package pcy.study.tobycleanspinrg.domain;
+package pcy.study.tobycleanspinrg.domain.member;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pcy.study.tobycleanspinrg.domain.request.MemberRegisterRequest;
+import pcy.study.tobycleanspinrg.domain.member.request.MemberInfoUpdateRequest;
+import pcy.study.tobycleanspinrg.domain.member.request.MemberRegisterRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static pcy.study.tobycleanspinrg.domain.MemberFixture.createMemberRegisterRequest;
-import static pcy.study.tobycleanspinrg.domain.MemberFixture.createPasswordEncoder;
+import static pcy.study.tobycleanspinrg.domain.member.MemberFixture.createMemberRegisterRequest;
+import static pcy.study.tobycleanspinrg.domain.member.MemberFixture.createPasswordEncoder;
 
 class MemberTest {
 
@@ -18,13 +19,14 @@ class MemberTest {
     @BeforeEach
     void setUp() {
         passwordEncoder = createPasswordEncoder();
-        member = pcy.study.tobycleanspinrg.domain.Member.register(createMemberRegisterRequest(), passwordEncoder);
+        member = Member.register(createMemberRegisterRequest(), passwordEncoder);
     }
 
     @Test
     void registerMember() {
         // then
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
+        assertThat(member.getDetail().getRegisteredAt()).isNotNull();
     }
 
     @Test
@@ -34,6 +36,7 @@ class MemberTest {
 
         // then
         assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
+        assertThat(member.getDetail().getActivatedAt()).isNotNull();
     }
 
     @Test
@@ -56,6 +59,7 @@ class MemberTest {
 
         // then
         assertThat(member.getStatus()).isEqualTo(MemberStatus.DEACTIVATED);
+        assertThat(member.getDetail().getDeactivatedAt()).isNotNull();
     }
 
     @Test
@@ -82,15 +86,6 @@ class MemberTest {
         // when
         // then
         assertThat(member.verifyPassword("hello", passwordEncoder)).isFalse();
-    }
-
-    @Test
-    void changeNickname() {
-        // when
-        member.changeNickname("Charlie");
-
-        // then
-        assertThat(member.getNickname()).isEqualTo("Charlie");
     }
 
     @Test
@@ -125,5 +120,31 @@ class MemberTest {
         // then
         assertThatThrownBy(() -> Member.register(createRequest, passwordEncoder))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void updateInfo() {
+        // given
+        member.activate();
+        MemberInfoUpdateRequest updateRequest = new MemberInfoUpdateRequest("Leo", "tobycleanspring", "자기소개");
+
+        // when
+        member.updateInfo(updateRequest);
+
+        // then
+        assertThat(member.getNickname()).isEqualTo(updateRequest.nickname());
+        assertThat(member.getDetail().getProfile().address()).isEqualTo(updateRequest.profileAddress());
+        assertThat(member.getDetail().getIntroduction()).isEqualTo(updateRequest.introduction());
+    }
+
+    @Test
+    void updateInfoFail() {
+        // given
+        MemberInfoUpdateRequest updateRequest = new MemberInfoUpdateRequest("Leo", "tobycleanspring", "자기소개");
+
+        // when
+        // then
+        assertThatThrownBy(() -> member.updateInfo(updateRequest))
+                .isInstanceOf(IllegalStateException.class);
     }
 }

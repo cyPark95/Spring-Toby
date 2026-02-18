@@ -1,7 +1,7 @@
-package pcy.study.tobycleanspinrg.domain;
+package pcy.study.tobycleanspinrg.domain.member;
 
 import org.springframework.lang.NonNull;
-import pcy.study.tobycleanspinrg.domain.request.MemberRegisterRequest;
+import pcy.study.tobycleanspinrg.domain.member.request.MemberRegisterRequest;
 
 public class MemberFixture {
 
